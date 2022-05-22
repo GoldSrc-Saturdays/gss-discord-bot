@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import discord
 import random
 
@@ -84,7 +85,4 @@ async def on_message(message):
 							  			  "Special thanks to my friend OliverOverworld.")
 		await message.channel.send(embed=embed)
 
-tokenfile = open("token.txt")
-btoken = tokenfile.read()
-tokenfile.close()
-client.run(btoken)
+client.run(os.getenv("GSSBOT_TOKEN"))

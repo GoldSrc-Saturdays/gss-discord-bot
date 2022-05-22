@@ -11,6 +11,6 @@ The source code for the GoldSrc Saturdays Walter Bennet Discord bot.
 ### Actually running the bot
 Create a bot on the [Discord Developer Portal](https://discord.com/developers/applications) like normal, and copy the bot token.
 
-Create a file called token.txt and paste the token in there.
+Create an environment variable called GSSBOT_TOKEN and set its value to the token.
 
 Now you should be able to run the bot.
