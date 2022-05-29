@@ -81,7 +81,7 @@ async def on_message(message):
 		embed = discord.Embed(title="Credits",
 							  description="Created by Veinhelm.\n\n"
 										  "Programmed in Python using Discord.py with Visual Studio Code.\n\n"
-										  "Hosted on Heroku.\n\n"
+										  "Hosted by Crazydog.\n\n"
 							  			  "Special thanks to my friend OliverOverworld.")
 		await message.channel.send(embed=embed)
 
