@@ -19,12 +19,12 @@ async def on_message(message):
 		return
 
 	if "goum" in message.content.lower():
-		print(f"{message.author.name} HAS GOUMED!!!")
+		print(f"{message.author.name}#{message.author.discriminator} HAS GOUMED!!!")
 		# NO MURDERING OR GOUMING
 		await message.channel.send("STAHP!!! NO GOUMING!!!", file=discord.File("assets/gouming.png"))
 
 	if message.content.lower() == ">help":
-		print(f"{message.author.name} has called >help")
+		print(f"{message.author.name}#{message.author.discriminator} has called >help")
 		embed = discord.Embed(title="Here is a list of commands!",
 							  description=">ourple - and why he ourple\n"
 										  ">samn - samn bro\n"
@@ -37,31 +37,31 @@ async def on_message(message):
 		await message.channel.send(embed=embed)
 
 	if message.content.lower() == ">ourple":
-		print(f"{message.author.name} has called >ourple")
+		print(f"{message.author.name}#{message.author.discriminator} has called >ourple")
 		# and why he ourple tho
 		await message.channel.send(file=discord.File("assets/ourple.png"))
 
 	if message.content.lower() == ">samn":
-		print(f"{message.author.name} has called >samn")
+		print(f"{message.author.name}#{message.author.discriminator} has called >samn")
 		# samn bro
 		await message.channel.send(file=discord.File("assets/samn.png"))
 
 	if message.content.lower() == ">honse":
-		print(f"{message.author.name} has called >honse")
+		print(f"{message.author.name}#{message.author.discriminator} has called >honse")
 		# I LIKE HONSES AND SOGS
 		await message.channel.send(file=discord.File("assets/HONSE.png"))
 
 	if message.content.lower() == ">hollowgrave":
-		print(f"{message.author.name} has called >hollowgrave")
+		print(f"{message.author.name}#{message.author.discriminator} has called >hollowgrave")
 		# Consider my power in a shallow grave
 		await message.channel.send(file=discord.File("assets/hollowgrave.mp4"))
 	
 	if message.content.lower().startswith(">8ball"):
-		print(f"{message.author.name} has called >8ball")
+		print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
 		await message.channel.send(random.choice(list(open("8ball_answers.txt"))))
 
 	if message.content.lower() == ">spray":
-		print(f"{message.author.name} has called >spray")
+		print(f"{message.author.name}#{message.author.discriminator} has called >spray")
 		await message.channel.send("**How to create a custom GoldSrc Spray**\n"
 								   "1. Find an image\n"
 								   "2. Go to https://www.spraytool.net/ \n"
@@ -77,7 +77,7 @@ async def on_message(message):
 								   "12. Enter a server and press the `spray` key. You may see the Half-Life logo the first time you spray - this is normal, and your custom spray should work the second time.")
 	
 	if message.content.lower() == ">credits":
-		print(f"{message.author.name} has called >credits")
+		print(f"{message.author.name}#{message.author.discriminator} has called >credits")
 		embed = discord.Embed(title="Credits",
 							  description="Created by Veinhelm.\n\n"
 										  "Programmed in Python using Discord.py with Visual Studio Code.\n\n"
