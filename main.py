@@ -13,6 +13,8 @@ async def on_ready():
     game = discord.Game(">help")
     await client.change_presence(status=discord.Status.online, activity=game)
 
+# Sorry for the nonsense comments from this point on
+
 @client.event
 async def on_message(message):
 	if message.author == client.user:
@@ -26,39 +28,43 @@ async def on_message(message):
 	if message.content.lower() == ">help":
 		print(f"{message.author.name}#{message.author.discriminator} has called >help")
 		embed = discord.Embed(title="Here is a list of commands!",
-							  description=">ourple - and why he ourple\n"
+							  description=">8ball - Send this command with a question or something and Dr. Bennet will answer\n"
+							  			  ">hollowgrave - Consider my power in a hollow grave\n"
+										  ">honse - i like the honses\n"
+										  ">hoot6 - hoot6.wav"
+										  ">ourple - and why he ourple\n"
 										  ">samn - samn bro\n"
-							  			  ">honse - i like the honses\n"
-										  ">hollowgrave - Consider my power in a hollow grave\n"
-										  ">8ball - Send this command with a question or something and Dr. Bennet will answer\n"
 										  ">spray - Instructions how to make a custom GoldSrc spray\n"
 										  ">credits - Credits and stuff\n\n"
 							 			  "And remember, absolutely NO GOUMING!")
 		await message.channel.send(embed=embed)
-
-	if message.content.lower() == ">ourple":
-		print(f"{message.author.name}#{message.author.discriminator} has called >ourple")
-		# and why he ourple tho
-		await message.channel.send(file=discord.File("assets/ourple.png"))
-
-	if message.content.lower() == ">samn":
-		print(f"{message.author.name}#{message.author.discriminator} has called >samn")
-		# samn bro
-		await message.channel.send(file=discord.File("assets/samn.png"))
-
+	
+	if message.content.lower().startswith(">8ball"):
+			print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
+			await message.channel.send(random.choice(list(open("8ball_answers.txt"))))
+	if message.content.lower() == ">hollowgrave":
+			print(f"{message.author.name}#{message.author.discriminator} has called >hollowgrave")
+		# Consider my power in a shallow grave
+			await message.channel.send(file=discord.File("assets/hollowgrave.mp4"))
+		
 	if message.content.lower() == ">honse":
 		print(f"{message.author.name}#{message.author.discriminator} has called >honse")
 		# I LIKE HONSES AND SOGS
 		await message.channel.send(file=discord.File("assets/HONSE.png"))
-
-	if message.content.lower() == ">hollowgrave":
-		print(f"{message.author.name}#{message.author.discriminator} has called >hollowgrave")
-		# Consider my power in a shallow grave
-		await message.channel.send(file=discord.File("assets/hollowgrave.mp4"))
 	
-	if message.content.lower().startswith(">8ball"):
-		print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
-		await message.channel.send(random.choice(list(open("8ball_answers.txt"))))
+	if message.content.lower() == ">hoot6":
+		print(f"{message.author.name}#{message.author.discriminator} has called >hoot6")
+		await message.channel.send(file=discord.File("assets/hoot6.wav"))
+	
+	if message.content.lower() == ">ourple":
+		print(f"{message.author.name}#{message.author.discriminator} has called >ourple")
+		# and why he ourple tho
+		await message.channel.send(file=discord.File("assets/ourple.png"))
+	
+	if message.content.lower() == ">samn":
+		print(f"{message.author.name}#{message.author.discriminator} has called >samn")
+		# samn bro
+		await message.channel.send(file=discord.File("assets/samn.png"))
 
 	if message.content.lower() == ">spray":
 		print(f"{message.author.name}#{message.author.discriminator} has called >spray")
