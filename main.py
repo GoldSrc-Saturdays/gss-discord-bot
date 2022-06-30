@@ -31,7 +31,7 @@ async def on_message(message):
 							  description=">8ball - Send this command with a question or something and Dr. Bennet will answer\n"
 							  			  ">hollowgrave - Consider my power in a hollow grave\n"
 										  ">honse - i like the honses\n"
-										  ">hoot6 - hoot6.wav"
+										  ">hoot6 - hoot6.wav\n"
 										  ">ourple - and why he ourple\n"
 										  ">samn - samn bro\n"
 										  ">spray - Instructions how to make a custom GoldSrc spray\n"
