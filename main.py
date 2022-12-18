@@ -19,7 +19,7 @@ async def on_ready():
 async def on_message(message):
 	if message.author == client.user:
 		return
-
+	
 	if "goum" in message.content.lower():
 		print(f"{message.author.name}#{message.author.discriminator} HAS GOUMED!!!")
 		# NO MURDERING OR GOUMING
@@ -40,13 +40,14 @@ async def on_message(message):
 		await message.channel.send(embed=embed)
 	
 	if message.content.lower().startswith(">8ball"):
-			print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
-			await message.channel.send(random.choice(list(open("8ball_answers.txt"))))
+		print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
+		await message.channel.send(random.choice(list(open("8ball_answers.txt"))))
+	
 	if message.content.lower() == ">hollowgrave":
-			print(f"{message.author.name}#{message.author.discriminator} has called >hollowgrave")
+		print(f"{message.author.name}#{message.author.discriminator} has called >hollowgrave")
 		# Consider my power in a shallow grave
-			await message.channel.send(file=discord.File("assets/hollowgrave.mp4"))
-		
+		await message.channel.send(file=discord.File("assets/hollowgrave.mp4"))
+	
 	if message.content.lower() == ">honse":
 		print(f"{message.author.name}#{message.author.discriminator} has called >honse")
 		# I LIKE HONSES AND SOGS
