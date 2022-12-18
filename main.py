@@ -48,7 +48,7 @@ async def on_message(message):
 										  ">samn - samn bro\n"
 										  ">spray - Instructions how to make a custom GoldSrc spray\n"
 										  ">credits - Credits and stuff\n\n"
-										  "/startserver - Start a game server (Goes offline after 10 minutes of inactivity)\n\n"
+										  "/startserver - Start a game server (Goes offline after 5 minutes of inactivity)\n\n"
 							 			  "And remember, absolutely NO GOUMING!")
 		await message.channel.send(embed=embed)
 	
