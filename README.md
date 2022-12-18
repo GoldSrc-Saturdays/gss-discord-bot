@@ -4,7 +4,7 @@ The source code for the GoldSrc Saturdays Walter Bennet Discord bot.
 ## Setting up
 
 ### Requirements
-- Python 3.5.3 or later
+- Python 3.8.0 or later
 - Discord.py
 - A Discord account
 
