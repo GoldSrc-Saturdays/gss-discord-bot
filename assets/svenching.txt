@@ -29,10 +29,7 @@ North Yankton
 Arthur Morgan
 John Marston
 Beaterator
-LS
-LC
 Los Santos
-SA
 Smoke
 Ballas
 Grove Street
@@ -41,7 +38,6 @@ Las Venturas
 San Fierro
 Mount Chilliad
 DarkViperAU
-MP
 Roman Bellic
 Sprunk
 eCola
