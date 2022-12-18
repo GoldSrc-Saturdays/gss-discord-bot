@@ -5,7 +5,7 @@ import discord
 import moddb
 import random
 
-client = discord.Client()
+client = discord.Client(intents=discord.Intents(message_content=True, guild_messages=True)) # You have no idea how long it took for me to figure this out...
 hl = moddb.parse_page("https://www.moddb.com/games/half-life")
 
 # Initialize bot and stuff
