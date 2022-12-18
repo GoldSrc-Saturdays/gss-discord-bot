@@ -39,7 +39,7 @@ async def on_message(message):
 							  			  ">canada - he is literally canada\n"
 										  ">gaben - 3\n"
 										  ">hollowgrave - Consider my power in a hollow grave\n"
-										  ">holomization - twten will be holomized"
+										  ">holomization - twten will be holomized\n"
 										  ">honse - i like the honses\n"
 										  ">hoot6 - hoot6.wav\n"
 										  ">ourple - and why he ourple\n"
