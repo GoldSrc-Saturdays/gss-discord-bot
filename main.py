@@ -6,6 +6,7 @@ import moddb
 import random
 
 client = discord.Client()
+hl = moddb.parse_page("https://www.moddb.com/games/half-life")
 
 # Initialize bot and stuff
 @client.event
@@ -83,11 +84,10 @@ async def on_message(message):
 	# WARNING!!! THIS IS REALLY REALLY STUPID!!!
 	if message.content.lower() == ">randmod":
 		print(f"{message.author.name}#{message.author.discriminator} has called >randmod")
-		bm = await message.channel.send("Checking ModDB...") # This is so slow that I have to do this so whoever calls the command knows it's working
-		hl = moddb.parse_page("https://www.moddb.com/games/half-life")
-		mod = random.choice(moddb.Game.get_mods(hl, random.randint(1, 40)))
-		mn1 = str.replace(str(mod), "<Thumbnail name=", "") # I told you this was stupid
-		mn2 = str.replace(mn1, " type=mod>", "") # Also, this ModDB API doesn't let you get the url of a mod...
+		bm = await message.channel.send("Checking ModDB...")
+		mod = random.choice(hl.get_mods(random.randint(1, 40)))
+		mn1 = str.replace(str(mod), "<Thumbnail name=", "")
+		mn2 = str.replace(mn1, " type=mod>", "")
 		await bm.edit(content=mn2)
 
 	if message.content.lower() == ">spray":
