@@ -113,7 +113,7 @@ async def on_message(message):
 								   "3. Upload the image\n"
 								   "4. Click `Preview`\n"
 								   "5. Click `Download`\n"
-								   "6. Move the `tempdecal.wad` file to your game directory (`steam/steamapps/common/Half-life/mod-name`), replacing the existing one\n"
+								   "6. Move the `tempdecal.wad` file to your game directory (`Steam/steamapps/common/Half-life/mod-name`), replacing the existing one\n"
 								   "7. Right click the `tempdecal.wad` file\n"
 								   "8. Click `properties`\n"
 								   "9. Check the `Read-only` box\n"
@@ -124,9 +124,9 @@ async def on_message(message):
 	if message.content.lower() == ">credits":
 		print(f"{message.author.name}#{message.author.discriminator} has called >credits")
 		embed = discord.Embed(title="Credits",
-							  description="Created by Veinhelm.\n\n"
-										  "Programmed in Python using Discord.py with Visual Studio Code.\n\n"
-										  "Hosted by Crazydog.\n\n"
+							  description="Created by Veinhelm.\n"
+										  "Programmed in Python using Discord.py with Visual Studio Code.\n"
+										  "Hosted by Crazydog.\n"
 							  			  "Special thanks to my friend OliverOverworld.")
 		await message.channel.send(embed=embed)
 
