@@ -8,6 +8,12 @@ import random
 client = discord.Client(intents=discord.Intents(message_content=True, guild_messages=True)) # You have no idea how long it took for me to figure this out...
 hl = moddb.parse_page("https://www.moddb.com/games/half-life")
 
+# I used Chat GPT to help me with this because I suck
+with open("assets/svenching.txt", "r") as svenching_file:
+	svenching_words = svenching_file.readlines()
+
+svenching_words = [svenching_word.strip().lower() for svenching_word in svenching_words]
+
 # Initialize bot and stuff
 @client.event
 async def on_ready():
@@ -23,17 +29,17 @@ async def on_message(message):
 		return
 	
 	if "goum" in message.content.lower():
-		print(f"{message.author.name}#{message.author.discriminator} HAS GOUMED!!!")
+		print(f"{message.author.name}#{message.author.discriminator} HAS GOUMED!")
 		# NO MURDERING OR GOUMING
 		await message.channel.send("STAHP!!! NO GOUMING!!!", file=discord.File("assets/gouming.png"))
 	
 	if "homestuck" in message.content.lower():
-		print(f"{message.author.name}#{message.author.discriminator} HAS SAID HOMESTUCK!!!")
+		print(f"{message.author.name}#{message.author.discriminator} HAS SAID HOMESTUCK!")
 		# Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.
 		await message.channel.send("Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.")
 	
-	if "svench" in message.content.lower():
-		print(f"{message.author.name}#{message.author.discriminator} HAS SVENCHED!!!")
+	if any(svenching_word in message.content.lower() for svenching_word in svenching_words):
+		print(f"{message.author.name}#{message.author.discriminator} HAS SVENCHED!")
 		# NO SVENCHING EITHER
 		await message.channel.send("STAHP!!! NO SVENCHING!!!")
 
@@ -58,7 +64,7 @@ async def on_message(message):
 	
 	if message.content.lower().startswith(">8ball"):
 		print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
-		await message.channel.send(random.choice(list(open("8ball_answers.txt"))))
+		await message.channel.send(random.choice(list(open("assets/8ball_answers.txt"))))
 	
 	if message.content.lower() == ">canada":
 		print(f"{message.author.name}#{message.author.discriminator} has called >canada")
