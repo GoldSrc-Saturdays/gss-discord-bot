@@ -2,6 +2,7 @@
 
 import os
 import discord
+import moddb
 import random
 
 client = discord.Client()
@@ -33,6 +34,7 @@ async def on_message(message):
 										  ">honse - i like the honses\n"
 										  ">hoot6 - hoot6.wav\n"
 										  ">ourple - and why he ourple\n"
+										  ">randmod - Selects and sends a random Half-Life 1 mod from ModDB\n"
 										  ">samn - samn bro\n"
 										  ">spray - Instructions how to make a custom GoldSrc spray\n"
 										  ">credits - Credits and stuff\n\n"
@@ -66,6 +68,16 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} has called >samn")
 		# samn bro
 		await message.channel.send(file=discord.File("assets/samn.png"))
+
+	# WARNING!!! THIS IS REALLY REALLY STUPID!!!
+	if message.content.lower() == ">randmod":
+		print(f"{message.author.name}#{message.author.discriminator} has called >randmod")
+		bm = await message.channel.send("Checking ModDB...") # This is so slow that I have to do this so whoever calls the command knows it's working
+		hl = moddb.parse_page("https://www.moddb.com/games/half-life")
+		sel = moddb.boxes.Thumbnail.parse(random.choice(moddb.Game.get_mods(hl)))
+		mn1 = str.replace(str(sel), "<Mod name=", "") # I told you this was stupid
+		mn2 = str.replace(mn1, ">", "") # Also, this ModDB API doesn't let you get the url of a mod...
+		await bm.edit(content=mn2)
 
 	if message.content.lower() == ">spray":
 		print(f"{message.author.name}#{message.author.discriminator} has called >spray")
