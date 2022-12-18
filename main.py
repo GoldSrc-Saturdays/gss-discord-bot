@@ -39,6 +39,7 @@ async def on_message(message):
 										  ">honse - i like the honses\n"
 										  ">hoot6 - hoot6.wav\n"
 										  ">ourple - and why he ourple\n"
+										  ">pain - i am in constant pain please send help"
 										  ">randmod - Selects and sends a random Half-Life 1 mod from ModDB\n"
 										  ">samn - samn bro\n"
 										  ">spray - Instructions how to make a custom GoldSrc spray\n"
@@ -68,6 +69,11 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} has called >ourple")
 		# and why he ourple tho
 		await message.channel.send(file=discord.File("assets/ourple.png"))
+	
+	if message.content.lower() == ">pain":
+		print(f"{message.author.name}#{message.author.discriminator} has called >pain")
+		# i am in constant pain please send help every second of my life is misery
+		await message.channel.send(file=discord.File("assets/pain.png"))
 	
 	if message.content.lower() == ">samn":
 		print(f"{message.author.name}#{message.author.discriminator} has called >samn")
