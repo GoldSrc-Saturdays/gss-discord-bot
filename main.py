@@ -31,6 +31,11 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} HAS SAID HOMESTUCK!!!")
 		# Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.
 		await message.channel.send("Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.")
+	
+	if "svench" in message.content.lower():
+		print(f"{message.author.name}#{message.author.discriminator} HAS SVENCHED!!!")
+		# NO SVENCHING EITHER
+		await message.channel.send("STAHP!!! NO SVENCHING!!!")
 
 	if message.content.lower() == ">help":
 		print(f"{message.author.name}#{message.author.discriminator} has called >help")
