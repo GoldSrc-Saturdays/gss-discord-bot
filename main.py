@@ -39,7 +39,7 @@ async def on_message(message):
 										  ">honse - i like the honses\n"
 										  ">hoot6 - hoot6.wav\n"
 										  ">ourple - and why he ourple\n"
-										  ">pain - i am in constant pain please send help"
+										  ">pain - i am in constant pain please send help\n"
 										  ">randmod - Selects and sends a random Half-Life 1 mod from ModDB\n"
 										  ">samn - samn bro\n"
 										  ">spray - Instructions how to make a custom GoldSrc spray\n"
