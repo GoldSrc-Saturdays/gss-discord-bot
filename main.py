@@ -37,6 +37,7 @@ async def on_message(message):
 		embed = discord.Embed(title="Here is a list of commands!",
 							  description=">8ball - Send this command with a question or something and Dr. Bennet will answer\n"
 							  			  ">canada - he is literally canada\n"
+										  ">cum - ranid loves it\n"
 										  ">gaben - 3\n"
 										  ">hollowgrave - Consider my power in a hollow grave\n"
 										  ">holomization - twten will be holomized\n"
@@ -59,6 +60,10 @@ async def on_message(message):
 	if message.content.lower() == ">canada":
 		print(f"{message.author.name}#{message.author.discriminator} has called >canada")
 		await message.channel.send(file=discord.File("assets/canada.png"))
+	
+	if message.content.lower() == ">cum":
+		print(f"{message.author.name}#{message.author.discriminator} has called >cum")
+		await message.channel.send(file=discord.File("assets/cum.png"))
 	
 	if message.content.lower() == ">gaben":
 		print(f"{message.author.name}#{message.author.discriminator} has called >canada")
