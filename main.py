@@ -74,7 +74,7 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} has called >randmod")
 		bm = await message.channel.send("Checking ModDB...") # This is so slow that I have to do this so whoever calls the command knows it's working
 		hl = moddb.parse_page("https://www.moddb.com/games/half-life")
-		mod = random.choice(moddb.Game.get_mods(hl))
+		mod = random.choice(moddb.Game.get_mods(hl, random.randint(1, 40)))
 		mn1 = str.replace(str(mod), "<Thumbnail name=", "") # I told you this was stupid
 		mn2 = str.replace(mn1, " type=mod>", "") # Also, this ModDB API doesn't let you get the url of a mod...
 		await bm.edit(content=mn2)
