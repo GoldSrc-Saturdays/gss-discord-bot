@@ -40,7 +40,6 @@ async def on_message(message):
 										  ">cum - ranid loves it\n"
 										  ">gaben - 3\n"
 										  ">hollowgrave - Consider my power in a hollow grave\n"
-										  ">holomization - twten will be holomized\n"
 										  ">honse - i like the honses\n"
 										  ">hoot6 - hoot6.wav\n"
 										  ">ourple - and why he ourple\n"
@@ -73,10 +72,6 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} has called >hollowgrave")
 		# Consider my power in a shallow grave
 		await message.channel.send(file=discord.File("assets/hollowgrave.mp4"))
-	
-	if message.content.lower() == ">holomization":
-		print(f"{message.author.name}#{message.author.discriminator} has called >holomization")
-		await message.channel.send(file=discord.File("assets/holomization.gif"))
 	
 	if message.content.lower() == ">honse":
 		print(f"{message.author.name}#{message.author.discriminator} has called >honse")
