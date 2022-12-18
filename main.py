@@ -36,7 +36,8 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} has called >help")
 		embed = discord.Embed(title="Here is a list of commands!",
 							  description=">8ball - Send this command with a question or something and Dr. Bennet will answer\n"
-							  			  ">hollowgrave - Consider my power in a hollow grave\n"
+							  			  ">canada - he is literally canada\n"
+										  ">hollowgrave - Consider my power in a hollow grave\n"
 										  ">honse - i like the honses\n"
 										  ">hoot6 - hoot6.wav\n"
 										  ">ourple - and why he ourple\n"
@@ -52,6 +53,10 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
 		await message.channel.send(random.choice(list(open("8ball_answers.txt"))))
 	
+	if message.content.lower() == ">canada":
+		print(f"{message.author.name}#{message.author.discriminator} has called >canada")
+		await message.channel.send(file=discord.File("assets/canada.png"))
+
 	if message.content.lower() == ">hollowgrave":
 		print(f"{message.author.name}#{message.author.discriminator} has called >hollowgrave")
 		# Consider my power in a shallow grave
