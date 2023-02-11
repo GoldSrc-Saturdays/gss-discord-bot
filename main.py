@@ -6,25 +6,26 @@ import moddb
 import random
 
 client = discord.Client(intents=discord.Intents(message_content=True, guild_messages=True)) # You have no idea how long it took for me to figure this out...
-hl = moddb.parse_page("https://www.moddb.com/games/half-life")
+hl = moddb.parse_page("https://www.moddb.com/games/half-life") # Keep the parsed Half-Life page in memory to decrease >randmod times
 
 # I used Chat GPT to help me with this because I suck
 with open("assets/svenching.txt", "r") as svenching_file:
 	svenching_words = svenching_file.readlines()
 
+# Needs to be converted to lowercase or else it won't work with `message.content.lower()`
 svenching_words = [svenching_word.strip().lower() for svenching_word in svenching_words]
 
-# Initialize bot and stuff
+# Initialize bot
 @client.event
 async def on_ready():
     print("Bot has been initialized.")
+	# Set status
     game = discord.Game(">help")
     await client.change_presence(status=discord.Status.online, activity=game)
 
-# Sorry for the nonsense comments from this point on
-
 @client.event
 async def on_message(message):
+	# Make sure a message that would normally be a trigger isn't from the bot itself
 	if message.author == client.user:
 		return
 	
@@ -32,6 +33,10 @@ async def on_message(message):
 		print(f"{message.author.name}#{message.author.discriminator} HAS GOUMED!")
 		# NO MURDERING OR GOUMING
 		await message.channel.send("STAHP!!! NO GOUMING!!!", file=discord.File("assets/gouming.png"))
+	
+	if "jope" in message.content.lower():
+		print(f"{message.author.name}#{message.author.discriminator} HAS ACKNOWLEDGED KING JOPE!")
+		await message.channel.send("ALL HAIL KING JOPE")
 	
 	if "homestuck" in message.content.lower():
 		print(f"{message.author.name}#{message.author.discriminator} HAS SAID HOMESTUCK!")
@@ -64,6 +69,7 @@ async def on_message(message):
 	
 	if message.content.lower().startswith(">8ball"):
 		print(f"{message.author.name}#{message.author.discriminator} has called >8ball")
+		# Open 8ball file, converts it to a list separated by new lines, choose randomly from the list
 		await message.channel.send(random.choice(list(open("assets/8ball_answers.txt"))))
 	
 	if message.content.lower() == ">canada":
@@ -107,7 +113,6 @@ async def on_message(message):
 		# samn bro
 		await message.channel.send(file=discord.File("assets/samn.png"))
 
-	# WARNING!!! THIS IS REALLY REALLY STUPID!!!
 	if message.content.lower() == ">randmod":
 		print(f"{message.author.name}#{message.author.discriminator} has called >randmod")
 		bm = await message.channel.send("Checking ModDB...")
@@ -141,4 +146,5 @@ async def on_message(message):
 							  			  "Special thanks to my friend OliverOverworld.")
 		await message.channel.send(embed=embed)
 
+# N0 K3Y 4 U! :^)
 client.run(os.getenv("GSSBOT_TOKEN"))
