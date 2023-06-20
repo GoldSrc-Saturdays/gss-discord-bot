@@ -145,7 +145,7 @@ async def on_message(message):
 	if message.content.lower() == ">credits":
 		print(f"{message.author.name} has called >credits")
 		embed = discord.Embed(title="Credits",
-							  description="Created by Veinhelm.\n"
+							  description="Created by Gryfhorn.\n"
 										  "Programmed in Python using Discord.py with Visual Studio Code.\n"
 										  "Hosted by Crazydog.\n"
 							  			  "Special thanks to my friend OliverOverworld.")
