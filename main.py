@@ -54,52 +54,52 @@ async def on_message(message):
 
 @tree.command(name="8ball", description="Send this command with a question and Dr. Bennet will answer")
 @app_commands.describe(question="Question")
-async def command(interaction, question: str):
+async def eightball(interaction, question: str):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(random.choice(list(open("assets/8ball_answers.txt"))))
 
 @tree.command(name="canada", description="he is literally canada")
-async def command(interaction):
+async def canada(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/canada.png"))
 
 @tree.command(name="cum", description="ranid loves it")
-async def command(interaction):
+async def cum(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/cum.png"))
 
 @tree.command(name="gaben", description="no way")
-async def command(interaction):
+async def gaben(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/gaben.png"))
 
 @tree.command(name="hollowgrave", description="Consider my power in a hollow grave")
-async def command(interaction):
+async def hollowgrave(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/hollowgrave.mp4"))
 
 @tree.command(name="honse", description="i like the honses and the dobs")
-async def command(interaction):
+async def honse(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/HONSE.png"))
 
 @tree.command(name="hoot6", description="hoot6.wav")
-async def command(interaction):
+async def hoot6(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/hoot6.wav"))
 
 @tree.command(name="ourple", description="and why he ourple")
-async def command(interaction):
+async def ourple(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/ourple.png"))
 
 @tree.command(name="pain", description="i am in constant pain")
-async def command(interaction):
+async def pain(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/pain.png"))
 
 @tree.command(name="randmod", description="Selects and sends a random Half-Life 1 mod from ModDB")
-async def command(interaction):
+async def randmod(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message("Checking ModDB...")
 	async with aiohttp.ClientSession() as session:
@@ -113,12 +113,12 @@ async def command(interaction):
 	await interaction.edit_original_response(content=thumbnail.url)
 
 @tree.command(name="samn", description="samn bro")
-async def command(interaction):
+async def samn(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/samn.png"))
 
 @tree.command(name="spray", description="Instructions how to make a custom GoldSrc spray")
-async def command(interaction):
+async def spray(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message("**How to create a custom GoldSrc Spray**\n"
 					 "1. Find an image\n"
@@ -135,7 +135,7 @@ async def command(interaction):
 					 "12. Enter a server and press the `spray` key. You may see the Half-Life logo the first time you spray - this is normal, and your custom spray should work the second time.")
 
 @tree.command(name="credits")
-async def command(interaction):
+async def credits(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	embed = discord.Embed(title="Credits",
 					  description="Created by Gryfhorn.\n"
