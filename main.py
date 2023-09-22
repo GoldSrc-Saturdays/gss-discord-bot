@@ -3,12 +3,22 @@
 import os
 import discord
 from discord import app_commands
-import moddb
-import aiohttp
 import random
+import aiohttp
+from bs4 import BeautifulSoup
+import moddb
+import json
 
 client = discord.Client(intents=discord.Intents(message_content=True, guild_messages=True)) # You have no idea how long it took for me to figure this out...
 tree = app_commands.CommandTree(client)
+
+if not os.path.exists("triggers.json"):
+	with open("triggers.json", "w") as triggers_file:
+		print("triggers.json not found. Creating...")
+		triggers_file.write(json.dumps({"goum": True, "jope": True, "homestuck": True, "svench": False}))
+
+with open("triggers.json", "r") as triggers_file:
+	triggers_dict = json.loads(triggers_file.read())
 
 # I used Chat GPT to help me with this because I suck
 with open("assets/svenching.txt", "r") as svenching_file:
@@ -17,10 +27,18 @@ with open("assets/svenching.txt", "r") as svenching_file:
 # Needs to be converted to lowercase or else it won't work with `message.content.lower()`
 svenching_words = [svenching_word.strip().lower() for svenching_word in svenching_words]
 
+async def getHalfLifeModPages():
+	async with aiohttp.ClientSession() as s:
+		async with s.get("https://www.moddb.com/games/half-life/mods") as r:
+			soup = BeautifulSoup(await r.text(), features="html.parser")
+			spacer = soup.find("span", class_="spacer")
+			lastpage = spacer.find_next("a").text
+	return int(lastpage)
+
 # Initialize bot
 @client.event
 async def on_ready():
-	print("Bot has been initialized.")
+	print(f"{client.user} has been initialized.")
 	try:
 		synced = await tree.sync()
 		print(f"Synced {len(synced)} commands.")
@@ -33,21 +51,21 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 	
-	if "goum" in message.content.lower():
+	if "goum" in message.content.lower() and triggers_dict["goum"]:
 		print(f"{message.author.name} HAS GOUMED!")
 		# NO MURDERING OR GOUMING
 		await message.channel.send("STAHP!!! NO GOUMING!!!", file=discord.File("assets/gouming.png"))
 	
-	if "jope" in message.content.lower():
+	if "jope" in message.content.lower()and triggers_dict["jope"]:
 		print(f"{message.author.name} HAS ACKNOWLEDGED KING JOPE!")
 		await message.channel.send("ALL HAIL KING JOPE")
 	
-	if "homestuck" in message.content.lower():
+	if "homestuck" in message.content.lower()and triggers_dict["homestuck"]:
 		print(f"{message.author.name} HAS SAID HOMESTUCK!")
 		# Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.
 		await message.channel.send("Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.")
 	
-	if any(svenching_word in message.content.lower() for svenching_word in svenching_words):
+	if any(svenching_word in message.content.lower() for svenching_word in svenching_words) and triggers_dict["svench"]:
 		print(f"{message.author.name} HAS SVENCHED!")
 		# NO SVENCHING EITHER
 		await message.channel.send("STAHP!!! NO SVENCHING!!!")
@@ -103,7 +121,7 @@ async def randmod(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message("Checking ModDB...")
 	async with aiohttp.ClientSession() as session:
-		async with session.get(f"https://www.moddb.com/games/half-life/mods/page/{random.randint(1, 43)}") as response:
+		async with session.get(f"https://www.moddb.com/games/half-life/mods/page/{random.randint(1, await getHalfLifeModPages())}") as response:
 			# I don't know if there's a way to make it pick any page, so that will have to do
 			soup = moddb.soup(await response.text())
 	
@@ -133,6 +151,22 @@ async def spray(interaction):
 					 "10. Hit `OK`\n"
 					 "11. Start/restart the game\n"
 					 "12. Enter a server and press the `spray` key. You may see the Half-Life logo the first time you spray - this is normal, and your custom spray should work the second time.")
+
+@tree.command(name="triggers", description="[Admin] Enable or disable message triggers")
+@app_commands.default_permissions(administrator=True)
+@app_commands.describe(trigger="Trigger", state="State")
+@app_commands.choices(trigger = [
+	app_commands.Choice(name="Goum", value=1),
+	app_commands.Choice(name="Jope", value=2),
+	app_commands.Choice(name="Homestuck", value=3),
+	app_commands.Choice(name="Svench", value=4)
+])
+async def triggers(interaction, trigger: app_commands.Choice[int], state: bool):
+	print(f"{interaction.user} has called /{interaction.command.name}")
+	with open("triggers.json", "w") as triggers_file:
+		triggers_dict.update({trigger.name.lower(): state})
+		triggers_file.write(json.dumps(triggers_dict))
+	await interaction.response.send_message(f"`{trigger.name}` trigger has been set to `{state}`.")
 
 @tree.command(name="credits")
 async def credits(interaction):
