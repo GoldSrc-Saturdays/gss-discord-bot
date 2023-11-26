@@ -56,11 +56,11 @@ async def on_message(message):
 		# NO MURDERING OR GOUMING
 		await message.channel.send("STAHP!!! NO GOUMING!!!", file=discord.File("assets/gouming.png"))
 	
-	if "jope" in message.content.lower()and triggers_dict["jope"]:
+	if "jope" in message.content.lower() and triggers_dict["jope"]:
 		print(f"{message.author.name} HAS ACKNOWLEDGED KING JOPE!")
 		await message.channel.send("ALL HAIL KING JOPE")
 	
-	if "homestuck" in message.content.lower()and triggers_dict["homestuck"]:
+	if "homestuck" in message.content.lower() and triggers_dict["homestuck"]:
 		print(f"{message.author.name} HAS SAID HOMESTUCK!")
 		# Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.
 		await message.channel.send("Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.")
@@ -74,7 +74,7 @@ async def on_message(message):
 @app_commands.describe(question="Question")
 async def eightball(interaction, question: str):
 	print(f"{interaction.user} has called /{interaction.command.name}")
-	await interaction.response.send_message(random.choice(list(open("assets/8ball_answers.txt"))))
+	await interaction.response.send_message(f"> {question}\n{random.choice(list(open('assets/8ball_answers.txt')))}")
 
 @tree.command(name="canada", description="he is literally canada")
 async def canada(interaction):
