@@ -122,7 +122,6 @@ async def randmod(interaction):
 	await interaction.response.send_message("Checking ModDB...")
 	async with aiohttp.ClientSession() as session:
 		async with session.get(f"https://www.moddb.com/games/half-life/mods/page/{random.randint(1, await getHalfLifeModPages())}") as response:
-			# I don't know if there's a way to make it pick any page, so that will have to do
 			soup = moddb.soup(await response.text())
 	
 	thumbnails, _, _, _ = moddb.boxes._parse_results(soup)
