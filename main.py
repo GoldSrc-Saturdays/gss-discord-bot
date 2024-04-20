@@ -15,7 +15,7 @@ tree = app_commands.CommandTree(client)
 if not os.path.exists("triggers.json"):
 	with open("triggers.json", "w") as triggers_file:
 		print("triggers.json not found. Creating...")
-		triggers_file.write(json.dumps({"goum": True, "jope": True, "homestuck": True, "svench": False}))
+		triggers_file.write(json.dumps({"goum": True, "jope": True, "homestuck": True, "svench": False, "randmsg": True}))
 
 with open("triggers.json", "r") as triggers_file:
 	triggers_dict = json.loads(triggers_file.read())
@@ -69,6 +69,9 @@ async def on_message(message):
 		print(f"{message.author.name} HAS SVENCHED!")
 		# NO SVENCHING EITHER
 		await message.channel.send("STAHP!!! NO SVENCHING!!!")
+	
+	if message.channel.id == 928478354414403635 and random.randint(1, 10) == 1 and triggers_dict["randmsg"]:
+		await message.channel.send(random.choice(["!", "Concerning"]))
 
 @tree.command(name="8ball", description="Send this command with a question and Dr. Bennet will answer")
 @app_commands.describe(question="Question")
@@ -154,16 +157,11 @@ async def spray(interaction):
 @tree.command(name="triggers", description="[Admin] Enable or disable message triggers")
 @app_commands.default_permissions(administrator=True)
 @app_commands.describe(trigger="Trigger", state="State")
-@app_commands.choices(trigger = [
-	app_commands.Choice(name="Goum", value=1),
-	app_commands.Choice(name="Jope", value=2),
-	app_commands.Choice(name="Homestuck", value=3),
-	app_commands.Choice(name="Svench", value=4)
-])
-async def triggers(interaction, trigger: app_commands.Choice[int], state: bool):
+@app_commands.choices(trigger = [app_commands.Choice(name=key.capitalize(), value=key) for key in triggers_dict])
+async def triggers(interaction, trigger: app_commands.Choice[str], state: bool):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	with open("triggers.json", "w") as triggers_file:
-		triggers_dict.update({trigger.name.lower(): state})
+		triggers_dict.update({trigger.update: state})
 		triggers_file.write(json.dumps(triggers_dict))
 	await interaction.response.send_message(f"`{trigger.name}` trigger has been set to `{state}`.")
 
