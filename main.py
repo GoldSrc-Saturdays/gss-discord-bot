@@ -70,7 +70,7 @@ async def on_message(message):
 		# NO SVENCHING EITHER
 		await message.channel.send("STAHP!!! NO SVENCHING!!!")
 	
-	if message.channel.id == 928478354414403635 and random.randint(1, 10) == 1 and triggers_dict["randmsg"]:
+	if message.channel.id == 928478354414403635 and random.randint(1, 1000) == 1 and triggers_dict["randmsg"]:
 		await message.channel.send(random.choice(["!", "Concerning"]))
 
 @tree.command(name="8ball", description="Send this command with a question and Dr. Bennet will answer")
@@ -161,7 +161,7 @@ async def spray(interaction):
 async def triggers(interaction, trigger: app_commands.Choice[str], state: bool):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	with open("triggers.json", "w") as triggers_file:
-		triggers_dict.update({trigger.update: state})
+		triggers_dict.update({trigger.value: state})
 		triggers_file.write(json.dumps(triggers_dict))
 	await interaction.response.send_message(f"`{trigger.name}` trigger has been set to `{state}`.")
 
