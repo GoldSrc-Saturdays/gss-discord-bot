@@ -2,3 +2,5 @@
 /env
 /venv
 triggers.json
+offset.json
+schedule.json

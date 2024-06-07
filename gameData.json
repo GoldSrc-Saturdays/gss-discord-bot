@@ -1,0 +1,137 @@
+{
+	"ahl": {
+		"name": "Action Half-Life",
+		"ip": "steam://connect/s.gssat.games:27033",
+		"roleId": "993037532797337631",
+		"link": "https://www.moddb.com/mods/action-half-life/downloads/action-half-life-manual-install"
+	},
+	"bd": {
+		"name": "Base Defense",
+		"ip": "steam://connect/s.gssat.games:27046",
+		"roleId": "1023278194696130572",
+		"link": "https://store.steampowered.com/app/632730/Base_Defense/"
+	},
+	"bb": {
+		"name": "BrainBread",
+		"ip": "steam://connect/s.gssat.games:27043",
+		"roleId": "1023278359565844582",
+		"link": "https://www.moddb.com/mods/brainbread/downloads/brain-bread-12"
+	},
+	"ci": {
+		"name": "Cold Ice Remastered",
+		"ip": "steam://connect/s.gssat.games:27044",
+		"roleId": "1023278432534134814",
+		"link": "https://www.moddb.com/mods/cold-ice-remastered/downloads/cold-ice-remastered-beta-4"
+	},
+	"cs": {
+		"name": "Counter-Strike",
+		"ip": "steam://connect/s.gssat.games:27017",
+		"roleId": "933178295485345803"
+	},
+	"czero": {
+		"name": "Counter-Strike: Condition Zero",
+		"ip": "steam://connect/s.gssat.games:27035",
+		"roleId": "933178357594603530"
+	},
+	"dod": {
+		"name": "Day of Defeat",
+		"ip": "steam://connect/s.gssat.games:27018",
+		"roleId": "933178365790277642"
+	},
+	"dmc": {
+		"name": "Deathmatch Classic",
+		"ip": "steam://connect/s.gssat.games:27031",
+		"roleId": "933178369401577592"
+	},
+	"dpr": {
+		"name": "Digital Paintball Redux",
+		"ip": "steam://connect/s.gssat.games:27045",
+		"roleId": "1023278492143591475",
+		"link": "https://store.steampowered.com/app/1066610/Digital_Paintball_Redux/"
+	},
+	"esf": {
+		"name": "Earth's Special Forces",
+		"ip": "steam://connect/s.gssat.games:27050",
+		"roleId": "1154657936581345320",
+		"link": "https://esforces.com/download"
+	},
+	"fa": {
+		"name": "Firearms",
+		"ip": "s.gssat.games:27042",
+		"roleId": "1023278543871946832",
+		"link": "https://www.moddb.com/mods/firearms/downloads/firearms-3x"
+	},
+	"hldm": {
+		"name": "Half-Life Deathmatch",
+		"ip": "steam://connect/s.gssat.games:27019",
+		"roleId": "933178372362739762"
+	},
+	"hf": {
+		"name": "Headcrab Frenzy",
+		"ip": "steam://connect/s.gssat.games:27040",
+		"roleId": "1023278592341328013",
+		"link": "https://store.steampowered.com/app/354900/Headcrab_Frenzy/"
+	},
+	"ns": {
+		"name": "Natural Selection",
+		"ip": "steam://connect/s.gssat.games:27034",
+		"roleId": "993037594998882385",
+		"link": "https://github.com/ENSL/NS/releases/latest"
+	},
+	"op4": {
+		"name": "Opposing Force Deathmatch",
+		"ip": "steam://connect/s.gssat.games:27030",
+		"roleId": "933178375642677248"
+	},
+	"ricochet": {
+		"name": "Ricochet",
+		"ip": "steam://connect/s.gssat.games:27015",
+		"roleId": "933178378113126450"
+	},
+	"si": {
+		"name": "Science & Industry",
+		"ip": "steam://connect/s.gssat.games:27039",
+		"roleId": "1023278636633170021",
+		"link": "https://www.moddb.com/mods/science-and-industry/downloads/science-and-industry-v14-archive"
+	},
+	"sven": {
+		"name": "Sven Co-op",
+		"ip": "steam://connect/192.223.24.234:27016",
+		"roleId": "933178380495519814"
+	},
+	"tfc": {
+		"name": "Team Fortress Classic",
+		"ip": "steam://connect/s.gssat.games:27016",
+		"roleId": "933178383288901703"
+	},
+	"tbg": {
+		"name": "The Battle Grounds",
+		"ip": "steam://connect/s.gssat.games:27049",
+		"roleId": "1117309063626231909",
+		"link": "https://www.moddb.com/mods/battle-grounds/downloads/the-battle-grounds-10f-final"
+	},
+	"ts": {
+		"name": "The Specialists",
+		"ip": "steam://connect/s.gssat.games:27032",
+		"roleId": "993037645766721576",
+		"link": "https://www.moddb.com/mods/the-specialists/downloads/the-specialists-v30-client-windows"
+	},
+	"th": {
+		"name": "They Hunger Deathmatch",
+		"ip": "steam://connect/s.gssat.games:27038",
+		"roleId": "1023278687052898335",
+		"link": "https://www.moddb.com/mods/they-hunger/downloads/they-hunger-trilogy-crossplatform"
+	},
+	"tw": {
+		"name": "ThreeWave CTF",
+		"ip": "steam://connect/s.gssat.games:27051",
+		"roleId": "1198437479229964440",
+		"link": "https://mega.nz/file/8o5jXDoB#xVGQR8D1Zpf1oXhpuo_Z6PeaIFPy1WGUhrBBksWluhw"
+	},
+	"vs": {
+		"name": "Vampire Slayer",
+		"ip": "steam://connect/s.gssat.games:27041",
+		"roleId": "1023278735568425021",
+		"link": "https://www.moddb.com/mods/vampire-slayer/downloads/vampire-slayer-chapter-vi"
+	}
+}
