@@ -27,6 +27,7 @@ import datetime
 from pathlib import Path
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
+import pytz
 
 client = discord.Client(intents=discord.Intents(message_content=True, guild_messages=True, guild_scheduled_events=True, guilds=True)) # You have no idea how long it took for me to figure this out...
 tree = app_commands.CommandTree(client)
@@ -83,7 +84,7 @@ def getNextDayOfWeek(date, day_of_week):
 def findSaturday(future = 0):
 	start = datetime.datetime.now() + datetime.timedelta(weeks=future)
 	next_saturday = getNextDayOfWeek(start, 5) # 5 represents Saturday
-	if datetime.datetime.dst:
+	if datetime.datetime.now(pytz.timezone(botConfig["timezone"])).dst():
 		return next_saturday.replace(hour=19, minute=0, second=0, microsecond=0, tzinfo=datetime.timezone.utc)
 	else:
 		return next_saturday.replace(hour=20, minute=0, second=0, microsecond=0, tzinfo=datetime.timezone.utc)
@@ -115,6 +116,24 @@ async def sendStartAnnouncement():
 		msg = f"<@&{gameData[eventSchedule[str(findSaturday())]["game"]]["roleId"]}> {gameData[eventSchedule[str(findSaturday())]["game"]]["name"]} NOW!!! {gameData[eventSchedule[str(findSaturday())]["game"]]["ip"]}"
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["announcementChannelId"]).send(msg)
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["extAnnouncementChannelId"]).send(msg)
+		#with open("schedule.json", "w") as schedule_file:
+		#	eventSchedule.pop(str(findSaturday()))
+		#	schedule_file.write(json.dumps(eventSchedule))
+
+#async def checkDST(scheduler: AsyncIOScheduler):
+#	dst1 = datetime.datetime.now(pytz.timezone(botConfig["timezone"])).dst()
+#	while True:
+#		await asyncio.sleep(1) # 30 minutes
+#		print("Checking for DST change...")
+#		dst2 = datetime.datetime.now(pytz.timezone(botConfig["timezone"])).dst()
+#		if dst1 != dst2:
+#			print("Updated for DST change")
+#			scheduler.reschedule_job("remind1", trigger=CronTrigger(day_of_week="fri", hour=15, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])))
+#			scheduler.reschedule_job("remind2", trigger=CronTrigger(day_of_week="sat", hour=14, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])))
+#			scheduler.reschedule_job("start", trigger=CronTrigger(day_of_week="sat", hour=15, minute=0, second=10, timezone=pytz.timezone(botConfig["timezone"])))
+#			dst1 = dst2
+#		else:
+#			print("DST has not changed")
 
 # Initialize bot
 @client.event
@@ -123,17 +142,13 @@ async def on_ready():
 
 	scheduler = AsyncIOScheduler()
 
-	# I know that the bot would need to be restarted once DST switches. Too bad!
-	if datetime.timezone.dst:
-		scheduler.add_job(sendReminderAnnouncement1, CronTrigger(day_of_week="fri", hour=19, minute=0, second=0, timezone=datetime.timezone.utc))
-		scheduler.add_job(sendReminderAnnouncement2, CronTrigger(day_of_week="sat", hour=18, minute=0, second=0, timezone=datetime.timezone.utc))
-		scheduler.add_job(sendStartAnnouncement, CronTrigger(day_of_week="sat", hour=19, minute=0, second=0, timezone=datetime.timezone.utc))
-	else:
-		scheduler.add_job(sendReminderAnnouncement1, CronTrigger(day_of_week="fri", hour=20, minute=0, second=0, timezone=datetime.timezone.utc))
-		scheduler.add_job(sendReminderAnnouncement2, CronTrigger(day_of_week="sat", hour=19, minute=0, second=0, timezone=datetime.timezone.utc))
-		scheduler.add_job(sendStartAnnouncement, CronTrigger(day_of_week="sat", hour=20, minute=0, second=0, timezone=datetime.timezone.utc))
+	scheduler.add_job(sendReminderAnnouncement1, CronTrigger(day_of_week="fri", hour=15, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])), id="remind1")
+	scheduler.add_job(sendReminderAnnouncement2, CronTrigger(day_of_week="sat", hour=14, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])), id="remind2")
+	scheduler.add_job(sendStartAnnouncement, CronTrigger(day_of_week="sat", hour=15, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])), id="start")
 	
 	scheduler.start()
+
+	#client.loop.create_task(checkDST(scheduler))
 
 	try:
 		synced = await tree.sync()

@@ -6,5 +6,6 @@
 	"extAnnouncementChannelId": 952362828340285520,
 	"invite": "https://discord.gg/xsT2xqVrym",
 	"historyChannelId": 985288115889532929,
-	"historyRoleId": 1005521374653194342
+	"historyRoleId": 1005521374653194342,
+	"timezone": "America/New_York"
 }
