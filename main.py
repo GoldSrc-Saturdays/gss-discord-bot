@@ -116,14 +116,14 @@ async def sendStartAnnouncement():
 		msg = f"<@&{gameData[eventSchedule[str(findSaturday())]["game"]]["roleId"]}> {gameData[eventSchedule[str(findSaturday())]["game"]]["name"]} NOW!!! {gameData[eventSchedule[str(findSaturday())]["game"]]["ip"]}"
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["announcementChannelId"]).send(msg)
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["extAnnouncementChannelId"]).send(msg)
-		#with open("schedule.json", "w") as schedule_file:
-		#	eventSchedule.pop(str(findSaturday()))
-		#	schedule_file.write(json.dumps(eventSchedule))
+		with open("schedule.json", "w") as schedule_file:
+			eventSchedule.pop(str(findSaturday()))
+			schedule_file.write(json.dumps(eventSchedule))
 
 #async def checkDST(scheduler: AsyncIOScheduler):
 #	dst1 = datetime.datetime.now(pytz.timezone(botConfig["timezone"])).dst()
 #	while True:
-#		await asyncio.sleep(1) # 30 minutes
+#		await asyncio.sleep(1800) # 30 minutes
 #		print("Checking for DST change...")
 #		dst2 = datetime.datetime.now(pytz.timezone(botConfig["timezone"])).dst()
 #		if dst1 != dst2:
