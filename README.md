@@ -9,7 +9,8 @@ The source code for the GoldSrc Saturdays Walter Bennet Discord bot.
 - The following pip packages
 	- discord.py 2.3.2
 	- moddb 0.11.0
-	- apscheduler 3.10.4
+	- schedule 1.2.2
+	- pytz 2024.1
 
 ### Running the bot
 Create a bot on the [Discord Developer Portal](https://discord.com/developers/applications) like normal, and copy the bot token.

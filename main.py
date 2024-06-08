@@ -25,8 +25,8 @@ import moddb
 import json
 import datetime
 from pathlib import Path
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from apscheduler.triggers.cron import CronTrigger
+import schedule
+import asyncio
 import pytz
 
 client = discord.Client(intents=discord.Intents(message_content=True, guild_messages=True, guild_scheduled_events=True, guilds=True)) # You have no idea how long it took for me to figure this out...
@@ -120,35 +120,24 @@ async def sendStartAnnouncement():
 			eventSchedule.pop(str(findSaturday()))
 			schedule_file.write(json.dumps(eventSchedule))
 
-#async def checkDST(scheduler: AsyncIOScheduler):
-#	dst1 = datetime.datetime.now(pytz.timezone(botConfig["timezone"])).dst()
-#	while True:
-#		await asyncio.sleep(1800) # 30 minutes
-#		print("Checking for DST change...")
-#		dst2 = datetime.datetime.now(pytz.timezone(botConfig["timezone"])).dst()
-#		if dst1 != dst2:
-#			print("Updated for DST change")
-#			scheduler.reschedule_job("remind1", trigger=CronTrigger(day_of_week="fri", hour=15, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])))
-#			scheduler.reschedule_job("remind2", trigger=CronTrigger(day_of_week="sat", hour=14, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])))
-#			scheduler.reschedule_job("start", trigger=CronTrigger(day_of_week="sat", hour=15, minute=0, second=10, timezone=pytz.timezone(botConfig["timezone"])))
-#			dst1 = dst2
-#		else:
-#			print("DST has not changed")
+async def scheduleTasks():
+	while True:
+		await asyncio.sleep(1)
+		schedule.run_pending()
+
+def scheduleAsyncJob(job):
+	asyncio.run_coroutine_threadsafe(job(), client.loop)
+
+schedule.every().friday.at("15:00:00", pytz.timezone(botConfig["timezone"])).do(scheduleAsyncJob, sendReminderAnnouncement1)
+schedule.every().saturday.at("14:00:00", pytz.timezone(botConfig["timezone"])).do(scheduleAsyncJob, sendReminderAnnouncement2)
+schedule.every().saturday.at("15:00:00", pytz.timezone(botConfig["timezone"])).do(scheduleAsyncJob, sendStartAnnouncement)
 
 # Initialize bot
 @client.event
 async def on_ready():
 	print(f"{client.user} has been initialized.")
 
-	scheduler = AsyncIOScheduler()
-
-	scheduler.add_job(sendReminderAnnouncement1, CronTrigger(day_of_week="fri", hour=15, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])), id="remind1")
-	scheduler.add_job(sendReminderAnnouncement2, CronTrigger(day_of_week="sat", hour=14, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])), id="remind2")
-	scheduler.add_job(sendStartAnnouncement, CronTrigger(day_of_week="sat", hour=15, minute=0, second=0, timezone=pytz.timezone(botConfig["timezone"])), id="start")
-	
-	scheduler.start()
-
-	#client.loop.create_task(checkDST(scheduler))
+	client.loop.create_task(scheduleTasks())
 
 	try:
 		synced = await tree.sync()
@@ -244,7 +233,7 @@ async def samn(interaction: discord.Interaction):
 @app_commands.default_permissions(administrator=True)
 @app_commands.describe(game="Game", announce="Announce", event_location="Event Location", event_subtitle="Event Subtitle", event_description="Event Description", week_number="Week Number")
 @app_commands.choices(game = [app_commands.Choice(name=gameData[key]["name"], value=key) for key in gameData])
-async def schedule(interaction: discord.Interaction, game: app_commands.Choice[str], announce: bool, event_location: str = None, event_subtitle: str = None, event_description: str = "Come play or watch live at https://twitch.tv/GoldSrcSaturdays", week_number: int = None):
+async def scheduleEvent(interaction: discord.Interaction, game: app_commands.Choice[str], announce: bool, event_location: str = None, event_subtitle: str = None, event_description: str = "Come play or watch live at https://twitch.tv/GoldSrcSaturdays", week_number: int = None):
 	if not week_number:
 		# This has to be done or else the offset won't update
 		week_number = findWeekCount()
