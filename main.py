@@ -99,25 +99,25 @@ def findWeekCount():
 	return (delta.days // 7) + weekOffset[""]
 
 async def sendReminderAnnouncement1():
-	if str(findSaturday()) in eventSchedule:
+	if str(findWeekCount()) in eventSchedule:
 		print("Sending day reminder")
-		msg = f"<@&{gameData[eventSchedule[str(findSaturday())]["game"]]["roleId"]}> Reminder: {gameData[eventSchedule[str(findSaturday())]["game"]]["name"]} tomorrow at <t:{int(findSaturday().timestamp())}:T>! {botConfig["invite"]}?event={eventSchedule[str(findSaturday())]["id"]}"
+		msg = f"<@&{gameData[eventSchedule[str(findWeekCount())]["game"]]["roleId"]}> Reminder: {gameData[eventSchedule[str(findWeekCount())]["game"]]["name"]} tomorrow at <t:{int(findSaturday().timestamp())}:T>! {botConfig["invite"]}?event={eventSchedule[str(findWeekCount())]["id"]}"
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["announcementChannelId"]).send(msg)
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["extAnnouncementChannelId"]).send(msg)
 
 async def sendReminderAnnouncement2():
-	if str(findSaturday()) in eventSchedule:
+	if str(findWeekCount()) in eventSchedule:
 		print("Sending hour reminder")
-		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["announcementChannelId"]).send(f"<@&{gameData[eventSchedule[str(findSaturday())]["game"]]["roleId"]}> {gameData[eventSchedule[str(findSaturday())]["game"]]["name"]} in ONE HOUR! {botConfig["invite"]}?event={eventSchedule[str(findSaturday())]["id"]}")
+		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["announcementChannelId"]).send(f"<@&{gameData[eventSchedule[str(findWeekCount())]["game"]]["roleId"]}> {gameData[eventSchedule[str(findWeekCount())]["game"]]["name"]} in ONE HOUR! {botConfig["invite"]}?event={eventSchedule[str(findWeekCount())]["id"]}")
 
 async def sendStartAnnouncement():
-	if str(findSaturday()) in eventSchedule:
+	if str(findWeekCount()) in eventSchedule:
 		print("Sending start announcement")
-		msg = f"<@&{gameData[eventSchedule[str(findSaturday())]["game"]]["roleId"]}> {gameData[eventSchedule[str(findSaturday())]["game"]]["name"]} NOW!!! {gameData[eventSchedule[str(findSaturday())]["game"]]["ip"]}"
+		msg = f"<@&{gameData[eventSchedule[str(findWeekCount())]["game"]]["roleId"]}> {gameData[eventSchedule[str(findWeekCount())]["game"]]["name"]} NOW!!! {gameData[eventSchedule[str(findWeekCount())]["game"]]["ip"]}"
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["announcementChannelId"]).send(msg)
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["extAnnouncementChannelId"]).send(msg)
 		with open("schedule.json", "w") as schedule_file:
-			eventSchedule.pop(str(findSaturday()))
+			eventSchedule.pop(str(findWeekCount()))
 			schedule_file.write(json.dumps(eventSchedule))
 
 async def scheduleTasks():
@@ -252,9 +252,9 @@ async def scheduleEvent(interaction: discord.Interaction, game: app_commands.Cho
 	
 	future = week_number - findWeekCount()
 
-	if str(findSaturday(future)) in eventSchedule and week_number == eventSchedule[str(findSaturday(future))]["week"]:
+	if str(week_number) in eventSchedule:
 		print("Updating existing event")
-		event = await client.get_guild(interaction.guild.id).get_scheduled_event(eventSchedule[str(findSaturday(future))]["id"]).edit(
+		event = await client.get_guild(interaction.guild.id).get_scheduled_event(eventSchedule[str(week_number)]["id"]).edit(
 			name=eventname,
 			privacy_level=discord.PrivacyLevel.guild_only,
 			start_time=findSaturday(future),
@@ -265,7 +265,7 @@ async def scheduleEvent(interaction: discord.Interaction, game: app_commands.Cho
 			location=event_location
 		)
 		with open("schedule.json", "w") as schedule_file:
-			eventSchedule.update({str(findSaturday(future)): {"game": game.value, "week": week_number, "id": event.id}})
+			eventSchedule.update({str(week_number): {"game": game.value, "id": event.id}})
 			schedule_file.write(json.dumps(eventSchedule))
 		await interaction.response.send_message(f"Updated `{game.name}` for week `{week_number}`")
 		print(f"{interaction.user} has updated {game.name} for week {week_number}")
@@ -282,7 +282,7 @@ async def scheduleEvent(interaction: discord.Interaction, game: app_commands.Cho
 			location=event_location
 		)
 		with open("schedule.json", "w") as schedule_file:
-			eventSchedule.update({str(findSaturday(future)): {"game": game.value, "week": week_number, "id": event.id}})
+			eventSchedule.update({str(week_number): {"game": game.value, "id": event.id}})
 			schedule_file.write(json.dumps(eventSchedule))
 		await interaction.response.send_message(f"Scheduled `{game.name}` for week `{week_number}`")
 		print(f"{interaction.user} has scheduled {game.name} for week {week_number}")
