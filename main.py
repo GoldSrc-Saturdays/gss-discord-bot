@@ -33,39 +33,39 @@ client = discord.Client(intents=discord.Intents(message_content=True, guild_mess
 tree = app_commands.CommandTree(client)
 
 if not os.path.exists("triggers.json"):
-	with open("triggers.json", "w") as triggers_file:
+	with open("triggers.json", "w") as f:
 		print("triggers.json not found. Creating...")
-		triggers_file.write(json.dumps({"goum": True, "jope": True, "homestuck": True, "svench": False, "randmsg": True}))
+		f.write(json.dumps({"goum": True, "jope": True, "homestuck": True, "svench": False, "randmsg": True}))
 
 if not os.path.exists("offset.json"):
-	with open("offset.json", "w") as offset_file:
+	with open("offset.json", "w") as f:
 		print("offset.json not found. Creating...")
 		# Stored in its own file to keep the config.json file easy to read and edit
-		offset_file.write(json.dumps({"": 0}))
+		f.write(json.dumps({"": 0}))
 
 if not os.path.exists("schedule.json"):
-	with open("schedule.json", "w") as schedule_file:
+	with open("schedule.json", "w") as f:
 		print("schedule.json not found. Creating...")
-		schedule_file.write(json.dumps({}))
+		f.write(json.dumps({}))
 
-with open("triggers.json", "r") as triggers_file:
-	triggers_dict = json.loads(triggers_file.read())
+with open("triggers.json", "r") as f:
+	triggers_dict = json.loads(f.read())
 
-with open("config.json", "r") as config_file:
-	botConfig = json.loads(config_file.read())
+with open("config.json", "r") as f:
+	botConfig = json.loads(f.read())
 
-with open("gameData.json", "r") as gameData_file:
-	gameData = json.loads(gameData_file.read())
+with open("gameData.json", "r") as f:
+	gameData = json.loads(f.read())
 
-with open("offset.json", "r") as offset_file:
+with open("offset.json", "r") as f:
 	# Read from a json rather than a txt file so the value is automatically read as an integer
-	weekOffset = json.loads(offset_file.read())
+	weekOffset = json.loads(f.read())
 
-with open("schedule.json", "r") as schedule_file:
-	eventSchedule = json.loads(schedule_file.read())
+with open("schedule.json", "r") as f:
+	eventSchedule = json.loads(f.read())
 
-with open("assets/svenching.txt", "r") as svenching_file:
-	svenching_words = svenching_file.readlines()
+with open("assets/svenching.txt", "r") as f:
+	svenching_words = f.readlines()
 
 # Needs to be converted to lowercase as well or else it won't work with `message.content.lower()`
 svenching_words = [svenching_word.strip().lower() for svenching_word in svenching_words]
@@ -116,9 +116,9 @@ async def sendStartAnnouncement():
 		msg = f"<@&{gameData[eventSchedule[str(findWeekCount())]["game"]]["roleId"]}> {gameData[eventSchedule[str(findWeekCount())]["game"]]["name"]} NOW!!! {gameData[eventSchedule[str(findWeekCount())]["game"]]["ip"]}"
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["announcementChannelId"]).send(msg)
 		await client.get_guild(botConfig["guildId"]).get_channel(botConfig["extAnnouncementChannelId"]).send(msg)
-		with open("schedule.json", "w") as schedule_file:
+		with open("schedule.json", "w") as f:
 			eventSchedule.pop(str(findWeekCount()))
-			schedule_file.write(json.dumps(eventSchedule))
+			f.write(json.dumps(eventSchedule))
 
 async def scheduleTasks():
 	while True:
@@ -264,9 +264,9 @@ async def scheduleEvent(interaction: discord.Interaction, game: app_commands.Cho
 			image=Path(f"assets/games/{game.value}.png").read_bytes(),
 			location=event_location
 		)
-		with open("schedule.json", "w") as schedule_file:
+		with open("schedule.json", "w") as f:
 			eventSchedule.update({str(week_number): {"game": game.value, "id": event.id}})
-			schedule_file.write(json.dumps(eventSchedule))
+			f.write(json.dumps(eventSchedule))
 		await interaction.response.send_message(f"Updated `{game.name}` for week `{week_number}`")
 		print(f"{interaction.user} has updated {game.name} for week {week_number}")
 	else:
@@ -281,9 +281,9 @@ async def scheduleEvent(interaction: discord.Interaction, game: app_commands.Cho
 			image=Path(f"assets/games/{game.value}.png").read_bytes(),
 			location=event_location
 		)
-		with open("schedule.json", "w") as schedule_file:
+		with open("schedule.json", "w") as f:
 			eventSchedule.update({str(week_number): {"game": game.value, "id": event.id}})
-			schedule_file.write(json.dumps(eventSchedule))
+			f.write(json.dumps(eventSchedule))
 		await interaction.response.send_message(f"Scheduled `{game.name}` for week `{week_number}`")
 		print(f"{interaction.user} has scheduled {game.name} for week {week_number}")
 	if announce:
@@ -312,9 +312,9 @@ async def spray(interaction: discord.Interaction):
 @app_commands.describe(trigger="Trigger", state="State")
 @app_commands.choices(trigger = [app_commands.Choice(name=key.capitalize(), value=key) for key in triggers_dict])
 async def triggers(interaction: discord.Interaction, trigger: app_commands.Choice[str], state: bool):	
-	with open("triggers.json", "w") as triggers_file:
+	with open("triggers.json", "w") as f:
 		triggers_dict.update({trigger.value: state})
-		triggers_file.write(json.dumps(triggers_dict))
+		f.write(json.dumps(triggers_dict))
 	await interaction.response.send_message(f"`{trigger.name}` trigger has been set to `{state}`.")
 	print(f"{interaction.user} has set trigger \"{trigger.name}\" to {state}")
 
@@ -323,8 +323,8 @@ async def triggers(interaction: discord.Interaction, trigger: app_commands.Choic
 @app_commands.describe(offset="Use a positive or negative value")
 async def weekoffset(interaction: discord.Interaction, offset: int):
 	weekOffset.update({"": offset})
-	with open("offset.json", "w") as offset_file:
-		offset_file.write(json.dumps(weekOffset))
+	with open("offset.json", "w") as f:
+		f.write(json.dumps(weekOffset))
 	await interaction.response.send_message(f"Week offset has been set to `{weekOffset[""]}`.")
 	print(f"{interaction.user} has set week offset to {weekOffset[""]}")
 
