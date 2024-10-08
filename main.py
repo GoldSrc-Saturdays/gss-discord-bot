@@ -193,6 +193,11 @@ async def cum(interaction: discord.Interaction):
 async def gaben(interaction: discord.Interaction):
 	await interaction.response.send_message(file=discord.File("assets/gaben.png"))
 
+@tree.command(name="hl_legacy", description="How to switch to HL Legacy")
+async def hl_legacy(interaction):
+	print(f"{interaction.user} has called ${interaction.command.name}")
+	await interaction.response.send_message(file=discord.File("assets/hl_legacy.png"))
+
 @tree.command(name="hollowgrave", description="Consider my power in a hollow grave")
 async def hollowgrave(interaction: discord.Interaction):
 	await interaction.response.send_message(file=discord.File("assets/hollowgrave.mp4"))
