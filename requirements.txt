@@ -5,7 +5,7 @@ attrs==24.2.0
 beautifulsoup4==4.12.3
 certifi==2024.8.30
 charset-normalizer==3.4.0
-discord.py==2.4.0
+discord.py==2.5.2
 frozenlist==1.5.0
 idna==3.10
 moddb==0.11.0
