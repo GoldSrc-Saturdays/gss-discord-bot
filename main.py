@@ -53,17 +53,17 @@ async def on_message(message):
 	
 	if "goum" in message.content.lower() and triggers_dict["goum"]:
 		print(f"{message.author.name} HAS GOUMED!")
-		# NO MURDERING OR GOUMING
-		await message.channel.send("STAHP!!! NO GOUMING!!!", file=discord.File("assets/gouming.png"))
+		# who up gouming
+		await message.channel.send("finna goum it", file=discord.File("assets/gouming.png"))
 	
 	if "jope" in message.content.lower() and triggers_dict["jope"]:
 		print(f"{message.author.name} HAS ACKNOWLEDGED KING JOPE!")
-		await message.channel.send("ALL HAIL KING JOPE")
+		await message.channel.send("i love king jope  <3 i ")
 	
 	if "homestuck" in message.content.lower() and triggers_dict["homestuck"]:
 		print(f"{message.author.name} HAS SAID HOMESTUCK!")
 		# Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.
-		await message.channel.send("Homestuck is a webcomic created by Andrew Hussie that is widely considered to be one of the worst webcomics ever made. It is infamous for its poor writing, characters, and overall story.")
+		await message.channel.send("Homestuck is a webcomic.")
 	
 	if any(svenching_word in message.content.lower() for svenching_word in svenching_words) and triggers_dict["svench"]:
 		print(f"{message.author.name} HAS SVENCHED!")
@@ -83,8 +83,9 @@ async def eightball(interaction, question: str):
 async def canada(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/canada.png"))
+	await interaction.response.send_message(file=discord.File("assets/canada.gif"))
 
-@tree.command(name="cum", description="ranid loves it")
+@tree.command(name="cum", description="i love it")
 async def cum(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/cum.png"))
@@ -107,14 +108,14 @@ async def hollowgrave(interaction):
 @tree.command(name="honse", description="i like the honses and the dobs")
 async def honse(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
-	await interaction.response.send_message(file=discord.File("assets/HONSE.png"))
+	await interaction.response.send_message(file=discord.File("assets/b1f-737620639.gif"))
 
 @tree.command(name="hoot6", description="hoot6.wav")
 async def hoot6(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/hoot6.wav"))
 
-@tree.command(name="ourple", description="and why he ourple")
+@tree.command(name="ourple", description="Furthermore, whatever for be his person ourple?")
 async def ourple(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/ourple.png"))
@@ -124,10 +125,10 @@ async def pain(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	await interaction.response.send_message(file=discord.File("assets/pain.png"))
 
-@tree.command(name="randmod", description="Selects and sends a random Half-Life 1 mod from ModDB")
+@tree.command(name="randmod", description="Selects and sends a random Half-Life 1 mod from ModDB because you asked nicely")
 async def randmod(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
-	await interaction.response.send_message("Checking ModDB...")
+	await interaction.response.send_message("ok sweetheart just for you <3")
 	async with aiohttp.ClientSession() as session:
 		async with session.get(f"https://www.moddb.com/games/half-life/mods/page/{random.randint(1, await getHalfLifeModPages())}") as response:
 			soup = moddb.soup(await response.text())
@@ -145,19 +146,7 @@ async def samn(interaction):
 @tree.command(name="spray", description="Instructions how to make a custom GoldSrc spray")
 async def spray(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
-	await interaction.response.send_message("**How to create a custom GoldSrc Spray**\n"
-					 "1. Find an image\n"
-					 "2. Go to https://www.spraytool.net/ \n"
-					 "3. Upload the image\n"
-					 "4. Click `Preview`\n"
-					 "5. Click `Download`\n"
-					 "6. Move the `tempdecal.wad` file to your game directory (`Steam/steamapps/common/Half-life/mod-name`), replacing the existing one\n"
-					 "7. Right click the `tempdecal.wad` file\n"
-					 "8. Click `properties`\n"
-					 "9. Check the `Read-only` box\n"
-					 "10. Hit `OK`\n"
-					 "11. Start/restart the game\n"
-					 "12. Enter a server and press the `spray` key. You may see the Half-Life logo the first time you spray - this is normal, and your custom spray should work the second time.")
+	await interaction.response.send_message("i don't give a shit about your stupid ass sprays go fuck yourself")
 
 @tree.command(name="triggers", description="[Admin] Enable or disable message triggers")
 @app_commands.default_permissions(administrator=True)
@@ -174,7 +163,7 @@ async def triggers(interaction, trigger: app_commands.Choice[str], state: bool):
 async def credits(interaction):
 	print(f"{interaction.user} has called /{interaction.command.name}")
 	embed = discord.Embed(title="Credits",
-					  description="Created by Gryfhorn.\n"
+					  description="Created by Gryfhorn and some dude in the server.\n"
 					  "Programmed with Python using Discord.py in Visual Studio Code.\n"
 					  "Hosted by Crazydog.\n"
 					  "Special thanks to OliverOverworld.")

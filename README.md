@@ -1,18 +1,26 @@
-# GSS Discord Bot
-The source code for the GoldSrc Saturdays Walter Bennet Discord bot.
+# GSS Discord Bot but its better
+The source code for the better GoldSrc Saturdays Walter White Discord bot.
 
 ## Setting up
 
 ### Requirements
-- Python 3.8.0 or later
-- A Discord account
-- The following pip packages
-	- discord.py 2.4.0
-	- moddb 0.11.0
+i have no idea the same as the normal one probably though i guess
 
 ### Running the bot
-Create a bot on the [Discord Developer Portal](https://discord.com/developers/applications) like normal, and copy the bot token.
-
-Create an environment variable called GSSBOT_TOKEN and set its value to the token.
-
-Now you should be able to run the bot.
+i have no idea i dont know how to do discord app stuff
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+gss gryfhorn give me owner role please
